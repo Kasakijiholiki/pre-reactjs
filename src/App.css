@@ -3,9 +3,9 @@
   padding-right: 30px;
   padding-top: 15px;
   padding-bottom: 15px;
-  margin: 20px;
-  border-radius: 10px;
+  /* border-radius: 10px; */
   width: 200px;
+  border: 1px solid #ccc; /* Add a border with a little gray (#ccc) */
 }
 
 .grid {
@@ -17,7 +17,6 @@
   overflow-x: scroll;
   max-width: 1400px;
 }
-
 .my-column-row {
   display: flex;
   flex-direction: column;
@@ -26,13 +25,14 @@
   padding-left: 5px;
   padding-right: 5px;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-  border-radius: 10px;
+  border-radius: 5px;
   cursor: pointer;
   padding-top: 10px;
   padding-bottom: 10px;
   gap: 1px;
   height: 100px;
   width: 200px;
+  border: 1px solid #ccc; /* Add a border with a little gray (#ccc) */
 }
 
 .hour {
@@ -52,6 +52,7 @@
 
 .nothing {
   width: 200px;
+  border: 1px solid #ccc; /* Add a border with a little gray (#ccc) */
   cursor: pointer;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -91,7 +92,7 @@
 
 .my-table {
   width: 100%;
-  border-spacing: 10px 1px;
+  border-spacing: 0px 0px;
 }
 .mt {
   margin-top: 50px;
