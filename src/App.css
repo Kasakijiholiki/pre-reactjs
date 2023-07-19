@@ -2,12 +2,16 @@
   padding-left: 60px;
   padding-right: 30px;
   padding-top: 15px;
+  height: 30px;
   padding-bottom: 15px;
   /* border-radius: 10px; */
   width: 200px;
-  border: 1px solid #ccc; /* Add a border with a little gray (#ccc) */
+  border-bottom: 1px solid #ccc; /* Add only a bottom border with a little gray (#ccc) */
 }
 
+.bg {
+  background-color: darkblue;
+}
 .grid {
   margin-top: 20px;
   display: grid;
@@ -18,21 +22,28 @@
   max-width: 1400px;
 }
 .my-column-row {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  justify-content: center;
-  padding-left: 5px;
-  padding-right: 5px;
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-  border-radius: 5px;
+  width: 200px;
   cursor: pointer;
   padding-top: 10px;
   padding-bottom: 10px;
-  gap: 1px;
-  height: 100px;
-  width: 200px;
-  border: 1px solid #ccc; /* Add a border with a little gray (#ccc) */
+  height: 120px;
+  margin-bottom: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0px;
+  margin: 0px;
+  height: 120px;
+
 }
 
 .hour {
@@ -47,17 +58,16 @@
   padding-top: 17px;
   padding-bottom: 10px;
   gap: 1px;
-  height: 100px;
+  height: 120px;
 }
 
 .nothing {
   width: 200px;
-  border: 1px solid #ccc; /* Add a border with a little gray (#ccc) */
   cursor: pointer;
   padding-top: 10px;
   padding-bottom: 10px;
   gap: 1px;
-  height: 100px;
+  height: 120px;
   margin-bottom: 5px;
   display: flex;
   flex-direction: column;
@@ -71,19 +81,34 @@
   height: 40px;
 }
 
+.none {
+  display: none;
+}
 .all {
+  height: 100%;
+  width: 100%;
   background-color: #caf0f8;
+}
+
+.none {
+  height: 100%;
+  width: 100%;
+  background-color: white;
 }
 .all:hover {
   background-color: #99c7de;
 }
 .odd {
+  height: 100%;
+  width: 100%;
   background-color: #ffbc42;
 }
 .odd:hover {
   background-color: #cc982e;
 }
 .even {
+  height: 100%;
+  width: 100%;
   background-color: #a2cf63;
 }
 .even:hover {
@@ -92,7 +117,6 @@
 
 .my-table {
   width: 100%;
-  border-spacing: 0px 0px;
 }
 .mt {
   margin-top: 50px;

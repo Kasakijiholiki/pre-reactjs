@@ -10,7 +10,7 @@ const TimeTable = () => {
             if (res.data.success) {
                 const data = res.data.data
                 setData(data)
-
+                console.log(data)
             }
         }).catch((err) => {
             console.log(err)
@@ -20,14 +20,28 @@ const TimeTable = () => {
 
 
 
-    const Column = ({ data }) => {
-        console.log("data")
-        console.log(data)
+    const Column = ({ data, day }) => {
+
         return (
-            <div className="my-column-row even">
+            <div className=" my-column-row">
                 {data.map((item) => {
+                    let week = "none"
+                    item?.timesStudy.map((time) => {
+                        if (day === time?.day) {
+                            if (time.oddWeek) {
+                                week = "odd"
+                            }
+                            else if (time.evenWeek) {
+                                week = "even"
+                            }
+                            else if (time.allWeek) {
+                                week = "all"
+                            }
+                        }
+                    })
+
                     return (
-                        <div>
+                        <div className={week + " center"}>
                             <p className="label">{item?.title}</p>
                             <span className="label">{"(FNS404)"}</span>
                         </div>
@@ -78,7 +92,6 @@ const TimeTable = () => {
             <table className="my-table">
                 <thead>
                     <tr>
-                        <th className="my-column-header">Hour</th>
                         <th className="my-column-header">ຈັນ</th>
                         <th className="my-column-header">ອັງຄານ</th>
                         <th className="my-column-header">ພຸດ</th>
@@ -89,7 +102,73 @@ const TimeTable = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {[data.monday, data.tuesday, data.wednesday, data.thursday, data.friday, data.saturday, data.sunday].map((dayData, index) => (
+                    <td>
+                        {data.monday && data?.monday.slice(1).map((monday) => {
+                            if (monday)
+                                return (
+                                    <Column data={monday || []} day={"ຈັນ"} />
+                                )
+                            else return <Nothing />
+                        })}
+                    </td>
+                    <td>
+                        {data.tuesday && data?.tuesday.slice(1).map((tuesday) => {
+                            if (tuesday)
+                                return (
+                                    <Column data={tuesday || []} day={"ອັງຄານ"} />
+                                )
+                            else return <Nothing />
+                        })}
+                    </td>
+
+                    <td>
+                        {data.wednsday && data?.wednsday.slice(1).map((wednsday) => {
+                            if (wednsday)
+                                return (
+                                    <Column data={wednsday || []} day={"ພຸດ"} />
+                                )
+                            else return <Nothing />
+                        })}
+                    </td>
+                    <td>
+                        {data.thursday && data?.thursday.slice(1).map((thursday) => {
+                            if (thursday)
+                                return (
+                                    <Column data={thursday || []} day={"ພະຫັດ"} />
+                                )
+                            else return <Nothing />
+                        })}
+                    </td>
+                    <td>
+                        {data.friday && data?.friday.slice(1).map((friday) => {
+                            if (friday)
+                                return (
+                                    <Column data={friday || []} day={"ສຸກ"} />
+                                )
+                            else return <Nothing />
+                        })}
+                    </td>
+                    <td>
+                        {data.saturday && data?.saturday.slice(1).map((saturday) => {
+                            if (saturday)
+                                return (
+                                    <Column data={saturday || []} day={"ເສົາ"} />
+                                )
+                            else return <Nothing />
+                        })}
+                    </td>
+                    <td>
+                        {data.sunday && data?.sunday.slice(1).map((sunday) => {
+                            if (sunday)
+                                return (
+                                    <Column data={sunday || []} day={"ອາທິດ"} />
+                                )
+                            else return <Nothing />
+                        })}
+                    </td>
+
+
+                    {/* {[data.monday, data.tuesday, data.wednesday, data.thursday, data.friday, data.saturday, data.sunday].map((dayData, index) => (
                         <tr key={index}>
                             {dayData &&
                                 dayData.slice(1).map((item) => (
@@ -102,7 +181,7 @@ const TimeTable = () => {
                                     </td>
                                 ))}
                         </tr>
-                    ))}
+                    ))} */}
                 </tbody>
             </table>
         </div>
