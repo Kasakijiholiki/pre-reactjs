@@ -17,6 +17,7 @@
   display: grid;
   grid-template-columns: 100px 200px;
   width: 100%;
+  gap: 50px;
   scroll-behavior: smooth;
   overflow-x: scroll;
   max-width: 1400px;
@@ -33,6 +34,7 @@
   justify-content: center;
   align-items: center;
   text-align: center;
+  gap: 0px;
 }
 .center {
   display: flex;
@@ -43,22 +45,22 @@
   padding: 0px;
   margin: 0px;
   height: 120px;
-
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
 }
 
 .hour {
+  width: 200px;
+  cursor: pointer;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  height: 120px;
+  margin-bottom: 5px;
   display: flex;
   flex-direction: column;
-  text-align: center;
   justify-content: center;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-radius: 10px;
-  cursor: pointer;
-  padding-top: 17px;
-  padding-bottom: 10px;
-  gap: 1px;
-  height: 120px;
+  align-items: center;
+  text-align: center;
+  gap: 0px;
 }
 
 .nothing {
@@ -117,6 +119,7 @@
 
 .my-table {
   width: 100%;
+  border-spacing: 20px 20px;
 }
 .mt {
   margin-top: 50px;

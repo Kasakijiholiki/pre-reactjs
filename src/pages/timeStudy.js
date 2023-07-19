@@ -3,9 +3,12 @@ import axios from "axios";
 
 const TimeTable = () => {
 
-    const [data, setData] = useState({})
 
+
+    const [data, setData] = useState({})
+    const [timeList, setTineList] = useState([])
     useEffect(() => {
+
         axios.get("http://localhost:8000/api/v1/grade/602e489d507db32d97b97ce4/4/1").then((res) => {
             if (res.data.success) {
                 const data = res.data.data
@@ -15,6 +18,18 @@ const TimeTable = () => {
         }).catch((err) => {
             console.log(err)
         })
+
+
+        axios.get("http://localhost:8000/api/v1/time/636cad7dcb5e606698a243e4").then((res) => {
+            if (res.data.success) {
+                const data = res.data.data
+                setTineList(data)
+                console.log(data)
+            }
+        }).catch((err) => {
+            console.log(err)
+        })
+
     }, [])
 
 
@@ -56,7 +71,6 @@ const TimeTable = () => {
 
         return (
             <div className="nothing">
-                <img className="icon" src="/empty.png" />
             </div>
         )
     }
@@ -66,28 +80,18 @@ const TimeTable = () => {
     return (
         <div className="grid">
             <div style={{
-                marginTop: "56px"
+                marginTop: "100px"
             }}>
-                <div className="hour">
-                    <p className="label">1</p>
-                    <p className="label">Hello</p>
-                </div>
-                <div className="hour">
-                    <p className="label">2</p>
-                    <p className="label">Hello</p>
-                </div>
-                <div className="hour">
-                    <p className="label">3</p>
-                    <p className="label">Hello</p>
-                </div>
-                <div className="hour">
-                    <p className="label">4</p>
-                    <p className="label">Hello</p>
-                </div>
-                <div className="hour">
-                    <p className="label">5</p>
-                    <p className="label">Hello</p>
-                </div>
+                {timeList.map((time) => {
+                    return (
+                        <div className="hour">
+                            <p className="label">{"ຊົ່ວໂມງ " + time?.hour}</p>
+                            <p className="label">{time?.time}</p>
+                        </div>
+
+                    )
+                })}
+
             </div>
             <table className="my-table">
                 <thead>
@@ -166,22 +170,6 @@ const TimeTable = () => {
                             else return <Nothing />
                         })}
                     </td>
-
-
-                    {/* {[data.monday, data.tuesday, data.wednesday, data.thursday, data.friday, data.saturday, data.sunday].map((dayData, index) => (
-                        <tr key={index}>
-                            {dayData &&
-                                dayData.slice(1).map((item) => (
-                                    <td key={item?._id}>
-                                        {item ? (
-                                            <Column data={item} />
-                                        ) : (
-                                            <Nothing />
-                                        )}
-                                    </td>
-                                ))}
-                        </tr>
-                    ))} */}
                 </tbody>
             </table>
         </div>
