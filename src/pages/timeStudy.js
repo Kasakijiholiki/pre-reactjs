@@ -78,101 +78,119 @@ const TimeTable = () => {
 
 
     return (
-        <div className="grid">
-            <div style={{
-                marginTop: "100px"
-            }}>
-                {timeList.map((time) => {
-                    return (
-                        <div className="hour">
-                            <p className="label">{"ຊົ່ວໂມງ " + time?.hour}</p>
-                            <p className="label">{time?.time}</p>
-                        </div>
-
-                    )
-                })}
+        <div className="content">
+            <div className="new-row">
+                <div style={{ marginRight: "40px" }} className="content">
+                    <div className="round-even" />
+                    <p>ອາທິດຄຸ່</p>
+                </div>
+                <div style={{ marginRight: "40px" }} className="content">
+                    <div className="round-odd" />
+                    <p>ອາທິດຄີກ</p>
+                </div>
+                <div style={{ marginRight: "40px" }} className="content">
+                    <div className="round-all" />
+                    <p>ທຸກອາທິດ</p>
+                </div>
 
             </div>
-            <table className="my-table">
-                <thead>
-                    <tr>
-                        <th className="my-column-header">ຈັນ</th>
-                        <th className="my-column-header">ອັງຄານ</th>
-                        <th className="my-column-header">ພຸດ</th>
-                        <th className="my-column-header">ພະຫັດ</th>
-                        <th className="my-column-header">ສຸກ</th>
-                        <th className="my-column-header">ເສົາ</th>
-                        <th className="my-column-header">ອາທິດ</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <td>
-                        {data.monday && data?.monday.slice(1).map((monday) => {
-                            if (monday)
-                                return (
-                                    <Column data={monday || []} day={"ຈັນ"} />
-                                )
-                            else return <Nothing />
-                        })}
-                    </td>
-                    <td>
-                        {data.tuesday && data?.tuesday.slice(1).map((tuesday) => {
-                            if (tuesday)
-                                return (
-                                    <Column data={tuesday || []} day={"ອັງຄານ"} />
-                                )
-                            else return <Nothing />
-                        })}
-                    </td>
+            <div className="grid">
+                <div style={{
+                    marginTop: "100px"
+                }}>
+                    {timeList.map((time) => {
+                        return (
+                            <div className="hour">
+                                <p className="label">{"ຊົ່ວໂມງ " + time?.hour}</p>
+                                <p className="label">{time?.time}</p>
+                            </div>
 
-                    <td>
-                        {data.wednsday && data?.wednsday.slice(1).map((wednsday) => {
-                            if (wednsday)
-                                return (
-                                    <Column data={wednsday || []} day={"ພຸດ"} />
-                                )
-                            else return <Nothing />
-                        })}
-                    </td>
-                    <td>
-                        {data.thursday && data?.thursday.slice(1).map((thursday) => {
-                            if (thursday)
-                                return (
-                                    <Column data={thursday || []} day={"ພະຫັດ"} />
-                                )
-                            else return <Nothing />
-                        })}
-                    </td>
-                    <td>
-                        {data.friday && data?.friday.slice(1).map((friday) => {
-                            if (friday)
-                                return (
-                                    <Column data={friday || []} day={"ສຸກ"} />
-                                )
-                            else return <Nothing />
-                        })}
-                    </td>
-                    <td>
-                        {data.saturday && data?.saturday.slice(1).map((saturday) => {
-                            if (saturday)
-                                return (
-                                    <Column data={saturday || []} day={"ເສົາ"} />
-                                )
-                            else return <Nothing />
-                        })}
-                    </td>
-                    <td>
-                        {data.sunday && data?.sunday.slice(1).map((sunday) => {
-                            if (sunday)
-                                return (
-                                    <Column data={sunday || []} day={"ອາທິດ"} />
-                                )
-                            else return <Nothing />
-                        })}
-                    </td>
-                </tbody>
-            </table>
+                        )
+                    })}
+
+                </div>
+                <table className="my-table">
+                    <thead>
+                        <tr>
+                            <th className="my-column-header">ຈັນ</th>
+                            <th className="my-column-header">ອັງຄານ</th>
+                            <th className="my-column-header">ພຸດ</th>
+                            <th className="my-column-header">ພະຫັດ</th>
+                            <th className="my-column-header">ສຸກ</th>
+                            <th className="my-column-header">ເສົາ</th>
+                            <th className="my-column-header">ອາທິດ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <td>
+                            {data.monday && data?.monday.slice(1).map((monday) => {
+                                if (monday)
+                                    return (
+                                        <Column data={monday || []} day={"ຈັນ"} />
+                                    )
+                                else return <Nothing />
+                            })}
+                        </td>
+                        <td>
+                            {data.tuesday && data?.tuesday.slice(1).map((tuesday) => {
+                                if (tuesday)
+                                    return (
+                                        <Column data={tuesday || []} day={"ອັງຄານ"} />
+                                    )
+                                else return <Nothing />
+                            })}
+                        </td>
+
+                        <td>
+                            {data.wednsday && data?.wednsday.slice(1).map((wednsday) => {
+                                if (wednsday)
+                                    return (
+                                        <Column data={wednsday || []} day={"ພຸດ"} />
+                                    )
+                                else return <Nothing />
+                            })}
+                        </td>
+                        <td>
+                            {data.thursday && data?.thursday.slice(1).map((thursday) => {
+                                if (thursday)
+                                    return (
+                                        <Column data={thursday || []} day={"ພະຫັດ"} />
+                                    )
+                                else return <Nothing />
+                            })}
+                        </td>
+                        <td>
+                            {data.friday && data?.friday.slice(1).map((friday) => {
+                                if (friday)
+                                    return (
+                                        <Column data={friday || []} day={"ສຸກ"} />
+                                    )
+                                else return <Nothing />
+                            })}
+                        </td>
+                        <td>
+                            {data.saturday && data?.saturday.slice(1).map((saturday) => {
+                                if (saturday)
+                                    return (
+                                        <Column data={saturday || []} day={"ເສົາ"} />
+                                    )
+                                else return <Nothing />
+                            })}
+                        </td>
+                        <td>
+                            {data.sunday && data?.sunday.slice(1).map((sunday) => {
+                                if (sunday)
+                                    return (
+                                        <Column data={sunday || []} day={"ອາທິດ"} />
+                                    )
+                                else return <Nothing />
+                            })}
+                        </td>
+                    </tbody>
+                </table>
+            </div>
         </div>
+
     );
 
 
