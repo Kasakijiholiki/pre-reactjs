@@ -5,17 +5,28 @@ const TimeTable = () => {
 
 
 
-    const [data, setData] = useState({})
+    const [dataTable, setDataTable] = useState({})
     const [timeList, setTineList] = useState([])
+
+    const [selectedYear, setSelectedYear] = useState(1); // State to store the selected option
+    const [selectedSemester, setSelectedSemester] = useState(1); // State to store the selected option
+
+
     useEffect(() => {
 
-        axios.get("http://localhost:8000/api/v1/grade/602e489d507db32d97b97ce4/4/1").then((res) => {
+        axios.get("http://localhost:8000/api/v1/grade/602e489d507db32d97b97ce4/" + selectedYear + "/" + selectedSemester).then((res) => {
             if (res.data.success) {
                 const data = res.data.data
-                setData(data)
+                setDataTable(data)
                 console.log(data)
             }
+            else {
+                console.log("data not found")
+                setDataTable([])
+            }
         }).catch((err) => {
+            setDataTable([])
+
             console.log(err)
         })
 
@@ -30,17 +41,16 @@ const TimeTable = () => {
             console.log(err)
         })
 
-    }, [])
+    }, [selectedYear, selectedSemester])
 
 
 
 
     const Column = ({ data, day }) => {
-
         return (
             <div className=" my-column-row">
                 {data.map((item) => {
-                    let week = "none"
+                    let week = ""
                     item?.timesStudy.map((time) => {
                         if (day === time?.day) {
                             if (time.oddWeek) {
@@ -54,11 +64,10 @@ const TimeTable = () => {
                             }
                         }
                     })
-
                     return (
-                        <div className={week + " center"}>
-                            <p className="label">{item?.title}</p>
-                            <span className="label">{"(FNS404)"}</span>
+                        <div className={week + " mycenter"}>
+                            <p className="mylabel">{item?.title}</p>
+                            <span className="mylabel">{"(FNS404)"}</span>
                         </div>
                     )
                 })}
@@ -68,7 +77,6 @@ const TimeTable = () => {
     }
 
     const Nothing = () => {
-
         return (
             <div className="nothing">
             </div>
@@ -77,10 +85,48 @@ const TimeTable = () => {
 
 
 
+
+
+    const handleYearChange = (event) => {
+        setSelectedYear(event.target.value); // Update the selected option when the user selects a new value
+    };
+
+    const handleSemesterChange = (event) => {
+        setSelectedSemester(event.target.value); // Update the selected option when the user selects a new value
+    };
+
+
     return (
         <div className="content">
             <div className="new-row">
-                <div style={{ marginRight: "40px" }} className="content">
+                <select
+                    className="form-select px-5 mx-4 py-2 mt-4 me-5"
+                    aria-label="Default select example"
+                    value={selectedYear} // Set the value of the select element based on the state
+                    onChange={handleYearChange} // Add an onChange event handler to update the state when the user selects an option
+                >
+                    <option selected>ປິຮຽນ</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                </select>
+
+                <select
+                    value={selectedSemester} // Set the value of the select element based on the state
+                    onChange={handleSemesterChange} // Add an onChange event handler to update the state when the user selects an option
+                    className="form-select px-5 mx-4 py-2 mt-4 me-5"
+                    aria-label="Default select example">
+                    <option selected>ພາກຮຽນ</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                </select>
+
+
+
+                <div style={{ marginLeft: "100px", marginRight: "40px" }} className="content">
                     <div className="round-even" />
                     <p>ອາທິດຄຸ່</p>
                 </div>
@@ -96,7 +142,7 @@ const TimeTable = () => {
             </div>
             <div className="grid">
                 <div style={{
-                    marginTop: "100px"
+                    marginTop: "70px"
                 }}>
                     {timeList.map((time) => {
                         return (
@@ -123,7 +169,7 @@ const TimeTable = () => {
                     </thead>
                     <tbody>
                         <td>
-                            {data.monday && data?.monday.slice(1).map((monday) => {
+                            {dataTable.monday && dataTable?.monday.slice(1).map((monday) => {
                                 if (monday)
                                     return (
                                         <Column data={monday || []} day={"ຈັນ"} />
@@ -132,7 +178,7 @@ const TimeTable = () => {
                             })}
                         </td>
                         <td>
-                            {data.tuesday && data?.tuesday.slice(1).map((tuesday) => {
+                            {dataTable.tuesday && dataTable?.tuesday.slice(1).map((tuesday) => {
                                 if (tuesday)
                                     return (
                                         <Column data={tuesday || []} day={"ອັງຄານ"} />
@@ -142,7 +188,7 @@ const TimeTable = () => {
                         </td>
 
                         <td>
-                            {data.wednsday && data?.wednsday.slice(1).map((wednsday) => {
+                            {dataTable.wednsday && dataTable?.wednsday.slice(1).map((wednsday) => {
                                 if (wednsday)
                                     return (
                                         <Column data={wednsday || []} day={"ພຸດ"} />
@@ -151,7 +197,7 @@ const TimeTable = () => {
                             })}
                         </td>
                         <td>
-                            {data.thursday && data?.thursday.slice(1).map((thursday) => {
+                            {dataTable.thursday && dataTable?.thursday.slice(1).map((thursday) => {
                                 if (thursday)
                                     return (
                                         <Column data={thursday || []} day={"ພະຫັດ"} />
@@ -160,7 +206,7 @@ const TimeTable = () => {
                             })}
                         </td>
                         <td>
-                            {data.friday && data?.friday.slice(1).map((friday) => {
+                            {dataTable.friday && dataTable?.friday.slice(1).map((friday) => {
                                 if (friday)
                                     return (
                                         <Column data={friday || []} day={"ສຸກ"} />
@@ -169,7 +215,7 @@ const TimeTable = () => {
                             })}
                         </td>
                         <td>
-                            {data.saturday && data?.saturday.slice(1).map((saturday) => {
+                            {dataTable.saturday && dataTable?.saturday.slice(1).map((saturday) => {
                                 if (saturday)
                                     return (
                                         <Column data={saturday || []} day={"ເສົາ"} />
@@ -178,7 +224,7 @@ const TimeTable = () => {
                             })}
                         </td>
                         <td>
-                            {data.sunday && data?.sunday.slice(1).map((sunday) => {
+                            {dataTable.sunday && dataTable?.sunday.slice(1).map((sunday) => {
                                 if (sunday)
                                     return (
                                         <Column data={sunday || []} day={"ອາທິດ"} />

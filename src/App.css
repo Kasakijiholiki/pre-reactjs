@@ -1,11 +1,13 @@
 .my-column-header {
   padding-left: 60px;
-  padding-right: 30px;
-  padding-top: 15px;
+  padding-right: 60px;
+  padding-top: 30px;
   height: 30px;
-  padding-bottom: 15px;
+  padding-bottom: 30px;
   /* border-radius: 10px; */
-  width: 200px;
+  width: 300px;
+  border-right: 1px solid #ccc;
+  border-left: 1px solid #ccc;
   border-bottom: 1px solid #ccc; /* Add only a bottom border with a little gray (#ccc) */
 }
 
@@ -13,9 +15,8 @@
   background-color: darkblue;
 }
 .grid {
-  margin-top: 20px;
   display: grid;
-  grid-template-columns: 100px 200px;
+  grid-template-columns: 150px 200px;
   width: 100%;
   gap: 50px;
   scroll-behavior: smooth;
@@ -25,18 +26,17 @@
 .my-column-row {
   width: 200px;
   cursor: pointer;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  height: 120px;
-  margin-bottom: 5px;
+  /* padding-top: 10px;
+  padding-bottom: 10px; */
+  height: 160px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  gap: 0px;
+  gap: 5px;
 }
-.center {
+.mycenter {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -44,7 +44,8 @@
   text-align: center;
   padding: 0px;
   margin: 0px;
-  height: 120px;
+  max-height: 160px;
+  height: 160px;
   box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
 }
 
@@ -61,7 +62,7 @@
   border-radius: 50%;
   background-color: #ffbc42;
 }
- 
+
 .round-all {
   width: 40px;
   height: 40px;
@@ -72,20 +73,23 @@
 .new-row {
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 .content {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
+  margin-top: 50px;;
 }
 
 .hour {
   width: 200px;
   cursor: pointer;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  height: 120px;
+  height: 160px;
   margin-bottom: 5px;
   display: flex;
   flex-direction: column;
@@ -96,13 +100,15 @@
 }
 
 .nothing {
+  border-right: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+  border-bottom: 1px solid #ccc; /* Add only a bottom border with a little gray (#ccc) */
   width: 200px;
   cursor: pointer;
   padding-top: 10px;
   padding-bottom: 10px;
   gap: 1px;
-  height: 120px;
-  margin-bottom: 5px;
+  height: 160px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -150,13 +156,13 @@
 }
 
 .my-table {
-  width: 100%;
-  border-spacing: 20px 20px;
+  width: 90%;
+  border-spacing: 10px;
 }
 .mt {
   margin-top: 50px;
 }
 
-.label {
+.mylabel {
   margin: 5px;
 }
