@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const TimeTable = () => {
+const TeacherTimeTable = () => {
 
 
 
     const [dataTable, setDataTable] = useState({})
+    const [timeList, setTineList] = useState([])
 
     const [selectedYear, setSelectedYear] = useState(1); // State to store the selected option
     const [selectedSemester, setSelectedSemester] = useState(1); // State to store the selected option
@@ -13,12 +14,15 @@ const TimeTable = () => {
 
     useEffect(() => {
 
-        axios.get("http://localhost:8000/api/v1/grade/602e489d507db32d97b97ce4/" + selectedYear + "/" + selectedSemester).then((res) => {
+        axios.get("http://localhost:8000/api/v1/teacher/6283448d24aa9a00082f8e13/" + selectedYear + "/" + selectedSemester).then((res) => {
             if (res.data.success) {
                 const data = res.data.data
                 setDataTable(data)
+                console.log("Hey here is your data")
+                console.log(data)
             }
             else {
+                console.log("data not found")
                 setDataTable([])
             }
         }).catch((err) => {
@@ -27,7 +31,15 @@ const TimeTable = () => {
         })
 
 
-
+        axios.get("http://localhost:8000/api/v1/time/636cad7dcb5e606698a243e4").then((res) => {
+            if (res.data.success) {
+                const data = res.data.data
+                setTineList(data)
+                console.log(data)
+            }
+        }).catch((err) => {
+            console.log(err)
+        })
 
     }, [selectedYear, selectedSemester])
 
@@ -35,9 +47,6 @@ const TimeTable = () => {
 
 
     const Column = ({ data, day }) => {
-
-    
-
         return (
             <div className=" my-column-row">
                 {data.map((item) => {
@@ -58,6 +67,7 @@ const TimeTable = () => {
                     return (
                         <div className={week + " mycenter"}>
                             <p className="mylabel">{item?.title}</p>
+                            <span className="mylabel">{item?.faculty}</span>
                             <span className="mylabel">{"(FNS404)"}</span>
                         </div>
                     )
@@ -135,17 +145,16 @@ const TimeTable = () => {
                 <div style={{
                     marginTop: "70px"
                 }}>
+                    {timeList.map((time) => {
+                        return (
+                            <div className="hour">
+                                <p className="label">{"ຊົ່ວໂມງ " + time?.hour}</p>
+                                <p className="label">{time?.time}</p>
+                            </div>
 
-                    <div className="hour">
-                        <p className="label">{"ຊົ່ວໂມງ 1"}</p>
-                        <p className="label">{"ຊົ່ວໂມງ 2"}</p>
-                        <p className="label">{"ຊົ່ວໂມງ 3"}</p>
-                        <p className="label">{"ຊົ່ວໂມງ 4"}</p>
-                        <p className="label">{"ຊົ່ວໂມງ 5"}</p>
-                        <p className="label">{"ຊົ່ວໂມງ 6"}</p>
-                        <p className="label">{"ຊົ່ວໂມງ 7"}</p>
-                        <p className="label">{"ຊົ່ວໂມງ 8"}</p>
-                    </div>
+                        )
+                    })}
+
                 </div>
                 <table className="my-table">
                     <thead>
@@ -236,4 +245,4 @@ const TimeTable = () => {
 }
 
 
-export default TimeTable
+export default TeacherTimeTable
