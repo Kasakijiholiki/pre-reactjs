@@ -8,6 +8,10 @@ const TeacherTimeTable = () => {
     const [dataTable, setDataTable] = useState({})
     const [timeList, setTineList] = useState([])
 
+    const [courseDetail, setCourseDetail] = useState()
+    const [showCourse, setShowCourse] = useState(false)
+
+
     const [selectedYear, setSelectedYear] = useState(1); // State to store the selected option
     const [selectedSemester, setSelectedSemester] = useState(1); // State to store the selected option
 
@@ -50,6 +54,10 @@ const TeacherTimeTable = () => {
         return (
             <div className=" my-column-row">
                 {data.map((item) => {
+
+                    console.log("item")
+
+                    console.log(item.faculty)
                     let week = ""
                     item?.timesStudy.map((time) => {
                         if (day === time?.day) {
@@ -64,12 +72,47 @@ const TeacherTimeTable = () => {
                             }
                         }
                     })
+
+
                     return (
-                        <div className={week + " mycenter"}>
+                        <div
+                            onClick={() => {
+
+                                let times = ""
+                                item.timesStudy.forEach((d, index) => {
+                                    d.times.forEach((time, timeIndex) => {
+                                        times += time?.time;
+                                        if (index !== item.timesStudy.length - 1 || timeIndex !== d.times.length - 1) {
+                                            times += " ແລະ ";
+                                        }
+                                    });
+                                });
+
+
+                                let w = ""
+                                if (week == "odd") w = "ອາທິດຄີກ"
+                                else if (week == "even") w = "ອາທິດຄີກ"
+                                else if (week === "all") w = "ທຸກອາທິດ"
+
+
+                                setCourseDetail({
+                                    title: item?.title,
+                                    description: item?.description,
+                                    week: w,
+                                    times: times,
+                                    facName: item?.faculty,
+                                    addressLearn: item?.addressLearn || "ບໍ່ມິຂໍ້ມຸນ"
+                                })
+                                setShowCourse(true)
+
+                            }}
+                            className={week + " mycenter"}>
                             <p className="mylabel">{item?.title}</p>
-                            <span className="mylabel">{item?.faculty}</span>
-                            <span className="mylabel">{"(FNS404)"}</span>
+                            {item.addressLearn && (
+                                <span className="mylabel">{"(" + item?.addressLearn || "" + ")"} </span>
+                            )}
                         </div>
+
                     )
                 })}
 
@@ -83,6 +126,7 @@ const TeacherTimeTable = () => {
             </div>
         )
     }
+
 
 
 
@@ -140,21 +184,58 @@ const TeacherTimeTable = () => {
                     <p>ທຸກອາທິດ</p>
                 </div>
 
+
+
+
+                {showCourse && (
+                    <div className="my-modal">
+                        <div className="modal-content w-25 m-0 mt-5 bg-white p-0 pt-3 pb-3">
+                            <h5 className="mb-4">ລະລະອຽດລາຍວິຊາ</h5>
+                            <div className="text-start">
+                                <p>ຊື່ວິຊາ: {courseDetail.title}</p>
+                                <p>ຄຳອະທິບາຍ: {courseDetail.description || "ບໍ່ມິຂໍ້ມຸນ"}</p>
+                                <p>ອາທິດຮຽນ: {courseDetail.week}</p>
+                                <p>ເວລາສອນ: {courseDetail.times}</p>
+                                <p>ສະຖານທີສອນ: {courseDetail.addressLearn || "ບໍ່ມິຂໍ້ມຸນ"}</p>
+                                <p>ຕະນະ: {courseDetail.facName || "ບໍ່ມີຂໍ້ມຸນ"}</p>
+                            </div>
+                            <button onClick={() => setShowCourse(false)} type="button" className="btn btn-primary px-5">ປິດ</button>
+                        </div>
+                    </div>
+                )}
+
+
+
+
             </div>
             <div className="grid">
                 <div style={{
                     marginTop: "70px"
                 }}>
-                    {timeList.map((time) => {
-                        return (
-                            <div className="hour">
-                                <p className="label">{"ຊົ່ວໂມງ " + time?.hour}</p>
-                                <p className="label">{time?.time}</p>
-                            </div>
-
-                        )
-                    })}
-
+                    <div className="hour">
+                        <p className="label">{"ຊົ່ວໂມງ 1"}</p>
+                    </div>
+                    <div className="hour">
+                        <p className="label">{"ຊົ່ວໂມງ 2"}</p>
+                    </div>
+                    <div className="hour">
+                        <p className="label">{"ຊົ່ວໂມງ 3"}</p>
+                    </div>
+                    <div className="hour">
+                        <p className="label">{"ຊົ່ວໂມງ 4"}</p>
+                    </div>
+                    <div className="hour">
+                        <p className="label">{"ຊົ່ວໂມງ 5"}</p>
+                    </div>
+                    <div className="hour">
+                        <p className="label">{"ຊົ່ວໂມງ 6"}</p>
+                    </div>
+                    <div className="hour">
+                        <p className="label">{"ຊົ່ວໂມງ 7"}</p>
+                    </div>
+                    <div className="hour">
+                        <p className="label">{"ຊົ່ວໂມງ 8"}</p>
+                    </div>
                 </div>
                 <table className="my-table">
                     <thead>
