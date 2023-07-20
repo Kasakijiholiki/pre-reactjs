@@ -54,10 +54,6 @@ const TeacherTimeTable = () => {
         return (
             <div className=" my-column-row">
                 {data.map((item) => {
-
-                    console.log("item")
-
-                    console.log(item.faculty)
                     let week = ""
                     item?.timesStudy.map((time) => {
                         if (day === time?.day) {
@@ -77,15 +73,17 @@ const TeacherTimeTable = () => {
                     return (
                         <div
                             onClick={() => {
-
                                 let times = ""
                                 item.timesStudy.forEach((d, index) => {
                                     d.times.forEach((time, timeIndex) => {
-                                        times += time?.time;
-                                        if (index !== item.timesStudy.length - 1 || timeIndex !== d.times.length - 1) {
-                                            times += " ແລະ ";
+                                        if (d.day === day) {
+                                            console.log()
+                                            times += time?.time;
+                                            if (index !== item.timesStudy.length - 1 || timeIndex !== d.times.length - 1) {
+                                                times += " ແລະ ";
+                                            }
                                         }
-                                    });
+                                    })
                                 });
 
 
@@ -114,9 +112,10 @@ const TeacherTimeTable = () => {
                         </div>
 
                     )
-                })}
+                })
+                }
 
-            </div>
+            </div >
         )
     }
 
@@ -185,11 +184,9 @@ const TeacherTimeTable = () => {
                 </div>
 
 
-
-
                 {showCourse && (
                     <div className="my-modal">
-                        <div className="modal-content w-25 m-0 mt-5 bg-white p-0 pt-3 pb-3">
+                        <div className="modal-content w-25 m-0 mt-5 bg-white p-0 pt-3 pb-3 px-3">
                             <h5 className="mb-4">ລະລະອຽດລາຍວິຊາ</h5>
                             <div className="text-start">
                                 <p>ຊື່ວິຊາ: {courseDetail.title}</p>
